@@ -1,4 +1,4 @@
-package org.example;
+package org.example.java1;
 
 import com.beust.ah.A;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,8 @@ import java.util.function.Consumer;
  *      总结：<br/>
  *      -> 左边：lambda形参列表的参数类型可以省略（类型推断）；如果lambda形参列表只有一个参数，其一对()也可以省略<br/>
  *      -> 右边：lambda体应该使用一堆{}包裹；如果lambda体只有一条执行语句（可能是return语句），省略这一对{}和return<br/>
- * 4.Lambda表达式的本质：作为接口的实例（实现类的对象）<br/>
+ * 4.Lambda表达式的本质：作为函数式接口的实例（实现类的对象）<br/>
+ * 5.如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口<br/>
  *
  * @author Jkevin
  * @date 2022年09月29日 1:18
