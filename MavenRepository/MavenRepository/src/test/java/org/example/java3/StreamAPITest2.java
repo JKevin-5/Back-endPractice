@@ -4,10 +4,8 @@ import org.example.java2.Employee;
 import org.example.java2.EmployeeData;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -60,4 +58,36 @@ public class StreamAPITest2 {
         System.out.println(min);
     }
 
+    //2-归约
+    @Test
+    public void test3(){
+        // 计算1-10的自然数的和
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+        // identity 是初始值，后一个是bifunction 用来处理参数，T T T 三个数值，最后称为一个T
+        Integer sum = list.stream().reduce(0, Integer::sum);
+        System.out.println(sum);
+
+        // 计算公司所有员工工资的总和
+        List<Employee> employees = EmployeeData.getEmployeeData();
+        Stream<Integer> yearStream = employees.stream().map(Employee::getYear);
+//        Optional<Integer> sumOptional = yearStream.reduce(Integer::sum);
+        Optional<Integer> sumOptional = yearStream.reduce((d1,d2) -> d1+d2);
+        System.out.println(sumOptional);
+
+
+    }
+
+    // 3-收集
+    @Test
+    public void test4(){
+        // 查找一个工资大于6000的员工，结果返回为一个List或Set
+        List<Employee> employees = EmployeeData.getEmployeeData();
+        List<Employee> collect = employees.stream().filter(e -> e.getYear() > 5).collect(Collectors.toList());
+        collect.forEach(System.out::println);
+
+        System.out.println();
+
+        Set<Employee> collect1 = employees.stream().filter(e -> e.getYear() > 5).collect(Collectors.toSet());
+        collect1.forEach(System.out::println);
+    }
 }
