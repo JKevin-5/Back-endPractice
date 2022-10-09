@@ -228,6 +228,19 @@ Stream是数据渠道，用于操作数据源（集合、数组等）所生成�
 | max(Comparator c)      | 返回流中最大值           |
 | foreach()              | 内部迭代                 |
 
+### 9、Stream的终止操作——规约
+
+| 方法                            | 描述                                                    |
+| ------------------------------- | ------------------------------------------------------- |
+| reduce(T iden,BinaryOperator b) | 可以将流中元素反复结合起来，得到一个值。返回T。         |
+| reduce(BinaryOperator b)        | 可以将流中元素反复结合起来，得到一个值。返回Optional<T> |
+
+### 10、Stream的终止操作——收集
+
+| 方法                 | 描述                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| collect(Collector c) | 将流转换为其他方式，接收一个Collector接口的实现，用于给Stream中元素做汇总的方法。 |
+
 
 
 
@@ -242,7 +255,24 @@ Stream是数据渠道，用于操作数据源（集合、数组等）所生成�
 - Optional<T> 类(java.util.Optional)是一个容器类，它可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在。原来用null表示一个值不存在，现在Optional可以更好的表达这个概念，并且可以避免空指针异常。
 - Optionnal类的javadoc描述如下：这是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。
 
+### 2、初始化
+
+| 方法                     | 描述                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| Optional.of(T t)         | 创建一个Optional 实例，t必须非空                             |
+| Optional.empty()         | 创建一个空的Optional 实例                                    |
+| Optional.ofNullable(T t) | t可以为null                                                  |
+| Optional.orElse(T t)     | 如果当前的Optional内部封装的t是非空的，则返回内部t<br />如果内部的t是空的，则返回orElse方法中的参数t1 |
 
 
-### 2、
 
+```java
+// orElse不一定只能放异常抛错，还可以返回一个默认的错误对象
+Girl girl1 = girlOptional.orElse(new Girl("Medus2"));
+```
+
+
+
+## 七、接口的增强
+
+Java8的接口可以定义一个默认方法和一个
