@@ -4,9 +4,9 @@
 
 笔记知识来源：[宋红康老师的Java8视频](【2019-尚硅谷-宋红康系列-Java8新特性】 https://www.bilibili.com/video/BV18J411x7XS?share_source=copy_web&vd_source=e4d2dda1a0a113dcff0b77095733b76e)（共29个视频）
 
-学习时间：2022/9/29 - 2022/10/01（共3天）
+学习时间：2022/9/29 - 2022/10/01（共3天）- pass国庆 - 2022/10/08（完结）
 
-
+后续补充：《Java核心技术卷II》
 
 学习思维：
 
