@@ -1,3 +1,11 @@
 *.class
 *.iml
 MavenRepository/MavenRepository/.idea/
+Projects/MavenRepository/.idea/libraries/
+Projects/MavenRepository/.idea/compiler.xml
+Projects/MavenRepository/.idea/encodings.xml
+Projects/MavenRepository/.idea/jarRepositories.xml
+Projects/MavenRepository/.idea/misc.xml
+Projects/MavenRepository/.idea/modules.xml
+Projects/MavenRepository/.idea/uiDesigner.xml
+Projects/MavenRepository/.idea/vcs.xml
