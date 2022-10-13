@@ -26,3 +26,6 @@ SpringCloudNetflix分布式框架下的开源分布式解决方案提供的组�
 ## 2. Eureka 注册中心
 
 - [官方文档](https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/)
+
+Eureka能够自动注册并发现服务，然后对服务的状态、信息进行集中管理，这样当我们需要获取其他服务的信息时，我们只需要向Eureka进行查询就可以了。
+

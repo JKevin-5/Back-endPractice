@@ -7,7 +7,6 @@ package com.test.controller;
 
 import com.test.entity.User;
 import com.test.service.UserService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +21,7 @@ public class UserController {
 
     @RequestMapping("/user/{uid}")
     public User getUserById(@PathVariable("uid")int uid){
+        System.out.println("被调用");
         return userService.getUserById(uid);
     }
 }

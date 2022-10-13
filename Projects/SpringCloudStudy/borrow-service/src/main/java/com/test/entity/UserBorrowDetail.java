@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
-public class BorrowDetail {
+public class UserBorrowDetail {
     User user;
     List<Book> bookList;
 }
