@@ -10,4 +10,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Borrow {
+    private int id;
+    private int uid;
+    private int bid;
 }
