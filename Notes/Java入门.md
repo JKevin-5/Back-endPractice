@@ -21,8 +21,8 @@ javac HelloWorld.java
 java HelloWorld
 ``` 
 
-jdk11之后（没有依赖其他库的情况）
-```bash
+jdk11新增执行方式（没有依赖其他库的情况）
+```shell
 java HelloWorld.java
 ```
 
