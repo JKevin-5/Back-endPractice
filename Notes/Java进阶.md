@@ -7,6 +7,110 @@
 
 # 多线程
 
+1. 线程之间的通信
+    - 使用同步锁
+    ```java
+    public class ObjectLock {
+        private static Object lock = new Object();
+
+        static class ThreadA implements Runnable {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    for (int i = 0; i < 100; i++) {
+                        System.out.println("Thread A " + i);
+                    }
+                }
+            }
+        }
+
+        static class ThreadB implements Runnable {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    for (int i = 0; i < 100; i++) {
+                        System.out.println("Thread B " + i);
+                    }
+                }
+            }
+        }
+
+        public static void main(String[] args) throws InterruptedException {
+            new Thread(new ThreadA()).start();
+            Thread.sleep(10);
+            new Thread(new ThreadB()).start();
+        }
+    }
+    ```
+    - 等待通知机制
+    ```java
+    public class WaitAndNotify {
+        private static Object lock = new Object();
+
+        static class ThreadA implements Runnable {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            System.out.println("ThreadA: " + i);
+                            lock.notify();
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    lock.notify();
+                }
+            }
+        }
+
+        static class ThreadB implements Runnable {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            System.out.println("ThreadB: " + i);
+                            lock.notify();
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    lock.notify();
+                }
+            }
+        }
+
+        public static void main(String[] args) throws InterruptedException {
+            new Thread(new ThreadA()).start();
+            Thread.sleep(1000);
+            new Thread(new ThreadB()).start();
+        }
+    }
+
+    // 输出：
+    ThreadA: 0
+    ThreadB: 0
+    ThreadA: 1
+    ThreadB: 1
+    ThreadA: 2
+    ThreadB: 2
+    ThreadA: 3
+    ThreadB: 3
+    ThreadA: 4
+    ThreadB: 4
+    ```
+    - 信号量
+    ```java
+
+    ```
+    - 管道
+2. 如何创建多线程
+    - Thread类和Runnable接口
+    - Callable、Future与FutureTask
+
 # java集合类型
 参考廖雪峰[博文](https://www.liaoxuefeng.com/wiki/1252599548343744/1265109905179456)
 - java标准库`java.util`中`Collection`是除`Map`之外所有其他集合类的**根接口**；
