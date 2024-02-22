@@ -7,6 +7,7 @@ package com.jkevin.websocket.Websocket;
  * @Version 1.0
  **/
 
+import com.alibaba.fastjson2.JSONObject;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
@@ -15,18 +16,32 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MyWebSocketHandler implements WebSocketHandler {
 
-    private static final Map<String, WebSocketSession> SESSIONS = new ConcurrentHashMap<>();
-
+    /**
+     * 房子
+     */
+    private static final Map<String,Map> HOUSE = new ConcurrentHashMap<>();
+    
+    /**
+     * 房间号
+     */
+    private static final String RoomNo = "RoomNo";
+    
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        String userName = session.getAttributes().get("userName").toString();
-        SESSIONS.put(userName, session);
-        System.out.println(String.format("成功建立连接~ userName: %s", userName));
+//        String userName = session.getAttributes().get("userName").toString();
+//        SESSIONS.put(userName, session);
+//        System.out.println(String.format("成功建立连接~ userName: %s", userName));
     }
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String msg = message.getPayload().toString();
+        JSONObject object = new JSONObject().putObject(msg);
+        if(object.containsKey(RoomNo)&&HOUSE.containsKey(RoomNo)){
+            // 进入房间
+            Map<String,WebSocketSession> room = HOUSE.get(RoomNo);
+            //
+        }
         System.out.println(msg);
     }
 
