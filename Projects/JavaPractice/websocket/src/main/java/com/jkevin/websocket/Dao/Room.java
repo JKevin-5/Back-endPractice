@@ -22,6 +22,14 @@ public class Room {
         this.history = "";
     }
 
+    public String getRoomId() {
+        return this.roomId;
+    }
+
+    public Boolean isLocked(){
+        return this.lock.isLocked();
+    }
+
     public void lock() {
         lock.lock();
     }
