@@ -1,5 +1,7 @@
 package com.jkevin.websocket.Dao;
 
+import com.alibaba.fastjson2.JSONObject;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -14,20 +16,28 @@ public class Room {
 
     private ReentrantLock lock;
 
-    private String history;
+    private JSONObject history;
 
     public Room(String roomId) {
         this.roomId = roomId;
         this.lock = new ReentrantLock();
-        this.history = "";
+        this.history = new JSONObject();
+    }
+
+    public JSONObject getHistory() {
+        return history;
+    }
+
+    public void setHistory(JSONObject history) {
+        this.history = history;
     }
 
     public String getRoomId() {
         return this.roomId;
     }
 
-    public Boolean isLocked(){
-        return this.lock.isLocked();
+    public ReentrantLock getLock(){
+        return lock;
     }
 
     public void lock() {

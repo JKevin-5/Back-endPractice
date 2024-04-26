@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -36,15 +37,33 @@ public class WebsocketServer {
         // 房间号不为空
         if (jsonObject.get("roomId") != null) {
             // 房间存在
-            if(house.contains(jsonObject.get("roomId"))){
+            if(house.containsKey(jsonObject.get("roomId"))){
                 Room room = house.get(jsonObject.get("roomId"));
                 // 尝试获取lock
-                if(room.isLocked()){
-                    System.out.println(room.getRoomId()+" is locked.");
+                if(room.getLock().tryLock()){
+                    System.out.println(room.getRoomId()+" tryLock is Ok.");
+                    JSONObject object = room.getHistory();
+                    String content = object.getString("message");
+                    object.put("message",content+jsonObject.get("message").toString());
+                    room.setHistory(object);
+                    room.unlock();
                 }else{
-                    room.lock();
-
+                    System.out.println(room.getRoomId()+" is locked.");
                 }
+            }else{
+                // 房间不存在则创建房间
+                Room room = new Room(jsonObject.get("roomId").toString());
+                house.put(room.getRoomId(), room);
+                room.lock();
+                JSONObject object = room.getHistory();
+                object.put("message",jsonObject.get("message").toString());
+                room.setHistory(object);
+                room.unlock();
+            }
+            try {
+                session.getBasicRemote().sendText(house.get(jsonObject.get("roomId")).getHistory().toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         System.out.println("收到"+session.getId()+"消息：" + message);
