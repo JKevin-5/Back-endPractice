@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/ws.io': {
-        target: 'ws://127.0.0.1:8080/ws/serverTwo',
+        target: 'ws://127.0.0.1:8080/websocket',
         ws: true
       } 
     }
