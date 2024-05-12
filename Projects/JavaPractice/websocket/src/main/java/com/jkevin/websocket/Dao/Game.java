@@ -1,5 +1,8 @@
 package com.jkevin.websocket.Dao;
 
-public interface Game {
+public abstract class Game {
+
+//    public abstract void start();
+
 
 }

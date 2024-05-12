@@ -6,6 +6,6 @@ package com.jkevin.websocket.Dao;
  * @description: TODO
  * @date 2024/5/10 16:33
  */
-public class Cabo implements Game{
+public class Cabo extends Game{
 
 }
