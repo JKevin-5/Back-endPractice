@@ -1,5 +1,6 @@
 package com.jkevin.websocket.Dao;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +13,6 @@ public class Client {
 
     private String userName;
 
-    private Map<String,Integer> tokenMap;
+    private Map<String, List<Token>> tokenMap;
 
 }
