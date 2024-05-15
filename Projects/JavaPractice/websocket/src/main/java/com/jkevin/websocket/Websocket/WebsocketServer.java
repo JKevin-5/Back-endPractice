@@ -52,7 +52,7 @@ public class WebsocketServer {
                 }
             }else{
                 // 房间不存在则创建房间
-                Room room = new Room(jsonObject.get("roomId").toString());
+                Room room = new Room(jsonObject.get("roomId").toString(),"owner");
                 house.put(room.getRoomId(), room);
                 room.lock();
                 JSONObject object = room.getHistory();

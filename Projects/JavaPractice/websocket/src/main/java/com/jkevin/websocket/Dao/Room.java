@@ -18,12 +18,16 @@ public class Room {
 
     private JSONObject history;
 
+    // 房主
+    private String owner;
+
     private Game game;
 
-    public Room(String roomId) {
+    public Room(String roomId,String playerName) {
         this.roomId = roomId;
         this.lock = new ReentrantLock();
         this.history = new JSONObject();
+        this.owner = playerName;
     }
 
     public JSONObject getHistory() {
@@ -56,5 +60,13 @@ public class Room {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

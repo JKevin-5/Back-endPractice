@@ -1,11 +1,9 @@
 package com.jkevin.websocket.Dao;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author mid2098
@@ -18,6 +16,12 @@ public class Cabo extends Game{
     private static int maxPlayer = 4;
     private static int minPlayer = 2;
 
+    private static final Cabo instance = new Cabo();
+
+    public static Cabo getInstance(){
+        return instance;
+    }
+
     // 牌堆
     private ConcurrentLinkedDeque<CaboToken> deck;
 
@@ -25,7 +29,7 @@ public class Cabo extends Game{
     private ConcurrentLinkedDeque<CaboToken> deadwood;
 
     public Cabo(){
-        this.
+//        this.
     }
     @Override
     public Boolean start(){
@@ -36,6 +40,9 @@ public class Cabo extends Game{
         // TODO 同步画面
         CaboToken token = initDeadwood();
         // 给玩家发牌 一人四张
+        // TODO 同步画面
+        initPlayer();
+        // 指定庄家
 
         return true;
     }
@@ -80,6 +87,11 @@ public class Cabo extends Game{
     }
 
     private void initPlayer(){
-
+        for(Player player :this.players){
+            // 分发四张手牌
+            for (int i=0;i<4;i++){
+                player.getTokens().add(this.deck.pop());
+            }
+        }
     }
 }

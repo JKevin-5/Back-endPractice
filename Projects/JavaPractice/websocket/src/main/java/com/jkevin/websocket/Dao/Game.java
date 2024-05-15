@@ -4,13 +4,13 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 public abstract class Game {
 
-    protected CopyOnWriteArraySet<Client> players;
+    protected CopyOnWriteArraySet<Player> players;
 
     public Game(){}
 
     // 添加玩家
-    public Boolean addPlayers(Client client){
-        return players.add(client);
+    public Boolean addPlayers(Player player){
+        return players.add(player);
     };
 
     // 启动

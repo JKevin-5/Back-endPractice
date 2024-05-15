@@ -9,10 +9,16 @@ import java.util.Map;
  * @description: TODO
  * @date 2024/4/12 9:36
  */
-public class Client {
+public class Player {
 
     private String userName;
 
-    private Map<String, List<Token>> tokenMap;
+    private List<Token> tokens;
 
+    public List<Token> getTokens() {
+        return tokens;
+    }
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
 }
