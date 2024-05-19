@@ -16,18 +16,23 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2024/4/23 9:15
  */
 @Component
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/game/{roomName}/{userName}")
 public class WebsocketServer {
 
     private ConcurrentHashMap<String, Room> house = new ConcurrentHashMap();
 
     @OnOpen
     public void onOpen(Session session) {
+        // 确认房间有位置，就可以加入房间
+        // 当前用户的在线状态设置为true
+        // 通知房间内存在的玩家(在线、断线重连)
         System.out.println("Session: "+session.getId()+",websocket连接成功");
     }
 
     @OnClose
     public void onClose(Session session) {
+        // 当前用户的在线状态设置为false
+        // 通知房间内存在的玩家(掉线)
         System.out.println("websocket连接关闭");
     }
 
@@ -71,6 +76,8 @@ public class WebsocketServer {
 
     @OnError
     public void onError(Session session,Throwable error) {
+        // 当前用户的在线状态设置为false
+        // 通知房间内存在的玩家(掉线)
         System.out.println("Session：" + session.getId() + "，websocket连接出错");
         error.printStackTrace();
     }

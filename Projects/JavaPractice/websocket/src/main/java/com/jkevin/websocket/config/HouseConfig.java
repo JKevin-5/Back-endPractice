@@ -1,6 +1,6 @@
 package com.jkevin.websocket.config;
 
-import com.jkevin.websocket.Dao.Cabo;
+import com.jkevin.websocket.Dao.House;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  * @date 2024/5/15 20:06
  */
 @Configuration
-public class GameConfig {
+public class HouseConfig {
 
     @Bean
-    public Cabo getCabo(){
-        return Cabo.getInstance();
+    public House getHouse(){
+        return House.getInstance();
     }
 }

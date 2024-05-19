@@ -2,6 +2,7 @@ package com.jkevin.websocket.Dao;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -20,6 +21,8 @@ public class Room {
 
     // 房主
     private String owner;
+
+    private CopyOnWriteArraySet<Player> players;
 
     private Game game;
 

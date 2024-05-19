@@ -1,16 +1,17 @@
 package com.jkevin.websocket.Dao;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public abstract class Game {
 
-    protected CopyOnWriteArraySet<Player> players;
+    protected ConcurrentHashMap<String,Player> players;
 
     public Game(){}
 
     // 添加玩家
-    public Boolean addPlayers(Player player){
-        return players.add(player);
+    public Player addPlayers(Player player){
+        return players.put(player.getUserName(),player);
     };
 
     // 启动
@@ -22,5 +23,7 @@ public abstract class Game {
     // 结束
     abstract Boolean end();
 
-
+    public ConcurrentHashMap<String,Player> getPlayers(){
+        return players;
+    }
 }

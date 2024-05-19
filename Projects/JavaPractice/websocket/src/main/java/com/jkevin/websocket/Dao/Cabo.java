@@ -16,11 +16,7 @@ public class Cabo extends Game{
     private static int maxPlayer = 4;
     private static int minPlayer = 2;
 
-    private static final Cabo instance = new Cabo();
 
-    public static Cabo getInstance(){
-        return instance;
-    }
 
     // 牌堆
     private ConcurrentLinkedDeque<CaboToken> deck;
@@ -87,10 +83,10 @@ public class Cabo extends Game{
     }
 
     private void initPlayer(){
-        for(Player player :this.players){
+        for(String playerName :this.players.keySet()){
             // 分发四张手牌
             for (int i=0;i<4;i++){
-                player.getTokens().add(this.deck.pop());
+                this.players.get(playerName).getTokens().add(this.deck.pop());
             }
         }
     }
