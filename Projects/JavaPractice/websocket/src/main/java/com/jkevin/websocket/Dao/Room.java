@@ -2,6 +2,8 @@ package com.jkevin.websocket.Dao;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,6 +17,8 @@ public class Room {
 
     private String roomId;
 
+    private String roomName;
+
     private ReentrantLock lock;
 
     private JSONObject history;
@@ -26,8 +30,9 @@ public class Room {
 
     private Game game;
 
-    public Room(String roomId,String playerName) {
-        this.roomId = roomId;
+    public Room(String roomName,String playerName) {
+        this.roomId = UUID.randomUUID().toString();
+        this.roomName = roomName;
         this.lock = new ReentrantLock();
         this.history = new JSONObject();
         this.owner = playerName;
@@ -71,5 +76,19 @@ public class Room {
 
     public String getOwner() {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(roomId, room.roomId)
+                && Objects.equals(game, room.game);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomId, lock, history, owner, players, game);
     }
 }

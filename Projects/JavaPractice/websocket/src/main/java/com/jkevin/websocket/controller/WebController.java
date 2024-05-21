@@ -1,15 +1,11 @@
 package com.jkevin.websocket.controller;
 
-import com.jkevin.websocket.Dao.House;
-import com.jkevin.websocket.Dao.Player;
 import com.jkevin.websocket.Dao.Room;
 import com.jkevin.websocket.dto.RoomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author mid2098
@@ -21,36 +17,23 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @RequestMapping("/game")
 public class WebController {
 
-    private House house;
+    private CopyOnWriteArrayList<Room> rooms = new CopyOnWriteArrayList<>();
 
     @Autowired
-    public WebController(House house) {
-        this.house = house;
-    }
+    public WebController() {}
 
     @GetMapping("/getRooms")
-    public ConcurrentHashMap<String,Room> getRooms(){
-        return house.getInstance().getRooms();
+    public CopyOnWriteArrayList<Room> getRooms(){
+        return rooms;
     }
 
     @PostMapping("/addRoom")
-    public Room addRoom(@RequestBody RoomDto room){
-        return house.getInstance().addRoom(room.getRoomName(), room.getUserName());
-    }
-
-    @PostMapping("/addPlayer")
-    public Boolean addPlayer(@RequestBody RoomDto dto){
-        Room room = house.getInstance().getRoom(dto.getRoomName());
-        if(null != room){
-            ConcurrentHashMap<String,Player> players = room.getGame().getPlayers();
-            if(players.containsKey(dto.getUserName())){
-                return false;
-            }else{
-                players.put(dto.getUserName(),new Player(dto.getUserName()));
-                return true;
-            }
+    public Room addRoom(@RequestBody RoomDto roomDto){
+        Room room = new Room(roomDto.getRoomName(), roomDto.getUserName());
+        if(rooms.add(room)){
+            return room;
         }else{
-            return false;
+            return null;
         }
     }
 }

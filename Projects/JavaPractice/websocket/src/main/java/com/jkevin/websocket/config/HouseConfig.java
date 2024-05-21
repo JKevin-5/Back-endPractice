@@ -1,6 +1,5 @@
 package com.jkevin.websocket.config;
 
-import com.jkevin.websocket.Dao.House;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
